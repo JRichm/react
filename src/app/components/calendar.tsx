@@ -1,0 +1,67 @@
+let currentDate = new Date();
+const currentYear = currentDate.getFullYear();
+const currentMonth = currentDate.getMonth() + 1;
+console.log(currentMonth)
+
+export default function Calendar() {
+
+    let month = currentMonth
+
+    const numDays = daysInMonth(currentMonth, currentYear)
+    const firstDay = getFirstDayOfWeek(currentMonth, currentYear)
+    const dayComponents = [];
+
+    console.log("firstDay: ", firstDay)
+
+for (let day = 1; day <= (5 * 7); day++) {
+    dayComponents.push(<Day key={day} day={day} />)
+}
+
+    return (
+        <>
+            <span>{currentMonth}</span>
+            <span>{currentYear}</span>
+            <div className="grid gap-x-1 gap-y-1 grid-cols-7 w-[800px]">
+                {dayComponents}
+            </div>
+        </>
+    )
+}
+
+export function Day(props) {
+    return (
+        <>
+            <div className="outline outline-1 outline-gray-500">
+                <span>
+                    <p>{props.day}</p>
+                </span>
+                <div className="h-12">
+
+                </div>
+            </div>
+        </>
+    )
+}
+
+export function daysInMonth(month, year) {
+    console.log(month)
+    if (!month) {
+        month = currentMonth;
+    }
+
+    if (!year) {
+        year = currentYear;
+    }
+
+    return new Date(year, month, 0).getDate();
+}
+
+function getFirstDayOfWeek(month, year) {
+    console.log('params: ', month, year)
+
+    const firstDayOfMonth = new Date(year, month - 1);
+
+    console.log('first day of the month: ', firstDayOfMonth)
+
+    return firstDayOfMonth.getDate();
+}
