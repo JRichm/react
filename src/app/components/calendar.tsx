@@ -1,3 +1,5 @@
+"use client"
+
 let currentDate = new Date();
 const currentYear = currentDate.getFullYear();
 const currentMonth = currentDate.getMonth() + 1;
@@ -13,9 +15,10 @@ export default function Calendar() {
 
     console.log("firstDay: ", firstDay)
 
-for (let day = 1; day <= (5 * 7); day++) {
-    dayComponents.push(<Day key={day} day={day} />)
-}
+    for (let day = 1 - firstDay; day <= numDays; day++) {
+        if (day > 0) dayComponents.push(<Day key={day} day={day} />)
+        else dayComponents.push(<Day key={day} day={daysInMonth(currentMonth-1, currentYear) + day} />)
+    }
 
     return (
         <>
@@ -31,7 +34,7 @@ for (let day = 1; day <= (5 * 7); day++) {
 export function Day(props) {
     return (
         <>
-            <div className="outline outline-1 outline-gray-500">
+            <div className="outline outline-1 outline-gray-500" onClick={clickDay}>
                 <span>
                     <p>{props.day}</p>
                 </span>
@@ -40,6 +43,7 @@ export function Day(props) {
                 </div>
             </div>
         </>
+
     )
 }
 
@@ -57,11 +61,15 @@ export function daysInMonth(month, year) {
 }
 
 function getFirstDayOfWeek(month, year) {
-    console.log('params: ', month, year)
+    console.log('params: ', month, year);
 
     const firstDayOfMonth = new Date(year, month - 1);
 
     console.log('first day of the month: ', firstDayOfMonth)
 
-    return firstDayOfMonth.getDate();
+    return firstDayOfMonth.getDay();
+}
+
+function clickDay(e) {
+    console.log(e)
 }
