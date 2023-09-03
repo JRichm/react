@@ -24,7 +24,7 @@ export default function Calendar() {
         <>
             <span>{currentMonth}</span>
             <span>{currentYear}</span>
-            <div className="grid gap-x-1 gap-y-1 grid-cols-7 w-[800px]">
+            <div className="grid gap-x-1 gap-y-2 grid-cols-7 w-[800px]">
                 {dayComponents}
             </div>
         </>
