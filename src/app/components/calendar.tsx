@@ -47,6 +47,14 @@ export function Day(props) {
     )
 }
 
+export function DateDetails() {
+    return (
+        <>
+            <p>fart</p>
+        </>
+    )
+}
+
 export function daysInMonth(month, year) {
     console.log(month)
     if (!month) {
