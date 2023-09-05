@@ -5,7 +5,31 @@ const currentYear = currentDate.getFullYear();
 const currentMonth = currentDate.getMonth() + 1;
 console.log(currentMonth)
 
-export default function Calendar() {
+
+let viewMonth = currentMonth;
+
+export default function CalendarComponent() {
+    return (
+        <>
+            <div className="outline outline-1 p-2">
+                <CalendarHeader />
+                <Calendar />
+            </div>
+        </>
+    )
+}
+
+export function CalendarHeader() {
+    return (
+        <>
+            <span>
+                <h1>{ viewMonth }</h1>
+            </span>
+        </>
+    )
+}
+
+export function Calendar() {
 
     let month = currentMonth
 
@@ -22,9 +46,7 @@ export default function Calendar() {
 
     return (
         <>
-            <span>{currentMonth}</span>
-            <span>{currentYear}</span>
-            <div className="grid gap-x-1 gap-y-2 grid-cols-7 w-[800px]">
+            <div className="grid gap-0 grid-cols-7 w-[800px]">
                 {dayComponents}
             </div>
         </>
@@ -34,7 +56,7 @@ export default function Calendar() {
 export function Day(props) {
     return (
         <>
-            <div className="outline outline-1 outline-gray-500" onClick={clickDay}>
+            <div className="hover:outline hover:outline-1 hover:outline-gray-500" onClick={clickDay}>
                 <span>
                     <p>{props.day}</p>
                 </span>
