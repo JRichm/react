@@ -6,12 +6,12 @@ const currentMonth = currentDate.getMonth() + 1;
 console.log(currentMonth)
 
 
-let viewMonth = currentMonth;
+let viewMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
 
 export default function CalendarComponent() {
     return (
         <>
-            <div className="outline outline-1 p-2">
+            <div className="outline outline-1 p-2 m-5">
                 <CalendarHeader />
                 <Calendar />
             </div>
@@ -22,8 +22,12 @@ export default function CalendarComponent() {
 export function CalendarHeader() {
     return (
         <>
-            <span>
-                <h1>{ viewMonth }</h1>
+            <span className="flex flex-row justify-between text-xl">
+                <h1 className="p-3">{ viewMonth.toLocaleString('default', {month: 'long'}) }</h1>
+                <span>
+                    <button>⬅</button>
+                    <button>➞</button>
+                </span>
             </span>
         </>
     )
