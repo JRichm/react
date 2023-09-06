@@ -40,10 +40,18 @@ export function Calendar(props) {
 
     const dayComponents = [];
     let dayOfMonth
+    let numDays = daysInMonth(props.month.getFullYear(), props.month.getMonth())
 
-    for (let i = 0; i <= 30; i++) {
+    for (let i = 1; i <= 42; i++) {
         dayOfMonth = i - props.month.getDay()
-        dayComponents.push(<Day key={i} day={i - props.month.getDay()} />)
+
+        if (dayOfMonth <= 0) {
+            dayComponents.push(<Day key={i} day={daysInMonth(props.month.getFullYear(), props.month.getMonth()) - -dayOfMonth} />)
+        } else if (dayOfMonth < numDays) {
+            dayComponents.push(<Day key={i} day={i - props.month.getDay()} />)
+        } else {
+            dayComponents.push(<Day key={i} day={i - numDays - props.month.getDay() + 1} />)
+        }
     }
 
     return (
@@ -97,19 +105,6 @@ export function DateDetails() {
     )
 }
 
-export function daysInMonth(month, year) {
-    console.log(month)
-    if (!month) {
-        month = currentMonth;
-    }
-
-    if (!year) {
-        year = currentYear;
-    }
-
-    return new Date(year, month, 0).getDate();
-}
-
 function getFirstDayOfWeek(month, year) {
     console.log('params: ', month, year);
 
@@ -122,4 +117,8 @@ function getFirstDayOfWeek(month, year) {
 
 function clickDay(e) {
     console.log(e)
+}
+
+var daysInMonth = function(y, m) {
+    return new Date(y, m, 0).getDate()
 }
