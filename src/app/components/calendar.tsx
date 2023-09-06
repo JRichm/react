@@ -41,14 +41,14 @@ export default function CalendarComponent() {
         <>
             <div className="outline outline-1 p-2 m-5">
                 <CalendarHeader />
+                <hr className="mb-2" />
                 <Calendar month={viewMonth}/>
             </div>
         </>
     )
 }
 
-export function CalendarHeader() {
-
+function CalendarHeader() {
     return (
         <>
             <span className="flex flex-row justify-between text-xl">
@@ -65,8 +65,8 @@ export function CalendarHeader() {
                         </select>
                     </div>
                     <div className="m-2 flex flex-row align-center">
-                        <button className="m-3">&laquo;</button>
-                        <button className="m-3">&raquo;</button>
+                        <button className="m-1">&laquo;</button>
+                        <button className="m-1">&raquo;</button>
                     </div>
                 </span>
             </span>
