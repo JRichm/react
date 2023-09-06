@@ -119,13 +119,21 @@ export function Calendar(props) {
 }
 
 export function Day(props) {
+    let dayNum;
+
+    if (props.day == currentDate.getDay()) {
+        dayNum = <p className="bg-blue-500 w-6 text-center rounded-full text-white">{props.day}</p>
+    } else {
+        dayNum = <p>{props.day}</p>
+    }
+
     return (
         <>
-            <div className="hover:outline hover:outline-1 hover:outline-gray-500" onClick={clickDay}>
+            <div className="hover:outline hover:outline-1 hover:outline-gray-500 m-1 p-1" onClick={clickDay}>
                 <span>
-                    <p>{props.day}</p>
+                    {dayNum}
                 </span>
-                <div className="h-12">
+                <div className="h-10">
 
                 </div>
             </div>
