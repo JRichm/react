@@ -10,7 +10,7 @@ export default function HomePage() {
   return (
     <>
       <MainHeader />
-      <div className="flex flex-row">
+      <div className="flex flex-row align-center">
         <LeftNav />
         <div className="flex flex-col">
           <CalendarComponent />

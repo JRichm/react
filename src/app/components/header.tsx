@@ -1,7 +1,11 @@
 export default function MainHeader() {
+
+    let today = new Date()
+
     return (
         <>
-            <h1>this is the header</h1>
+            <div className="m-5">
+            </div>
         </>
     )
 }

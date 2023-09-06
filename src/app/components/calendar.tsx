@@ -3,10 +3,38 @@
 let currentDate = new Date();
 const currentYear = currentDate.getFullYear();
 const currentMonth = currentDate.getMonth() + 1;
-console.log(currentMonth)
 
 
 let viewMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+let selectYears = []
+let selectMonths = []
+
+if (!selectYears[0]) {
+    console.log('select years not loaded')
+    for (let y = currentYear - 50; y < currentYear + 50; y++) {
+        if (y == currentYear) {
+            selectYears.push(
+                <option value={ y } selected={true}>{ y }</option>
+            )
+        } else {
+            selectYears.push(
+                <option value={ y }>{ y }</option>
+            )
+        }
+    }
+
+    for (let m = 1; m <= 12; m++) {
+        if (m == currentMonth) {
+            selectMonths.push(
+                <option value={ m } selected={true}>{ m }</option>
+            )
+        } else {
+            selectMonths.push(
+                <option value={ m }>{ m }</option>
+            )
+        }
+    }
+}
 
 export default function CalendarComponent() {
     return (
@@ -20,11 +48,18 @@ export default function CalendarComponent() {
 }
 
 export function CalendarHeader() {
+
     return (
         <>
             <span className="flex flex-row justify-between text-xl">
                 <h1 className="p-3">{ viewMonth.toLocaleString('default', {month: 'long'}) }</h1>
                 <span>
+                    <select name="month" placeholder='{currentMonth}'>
+                        {selectMonths}
+                    </select>
+                    <select name="year" placeholder='{currentYear}'>
+                        {selectYears}
+                    </select>
                     <button>⬅</button>
                     <button>➞</button>
                 </span>
@@ -34,10 +69,6 @@ export function CalendarHeader() {
 }
 
 export function Calendar(props) {
-
-    console.log(props.month)
-    console.log(props.month.getDay())
-
     const dayComponents = [];
     let dayOfMonth
     let numDays = daysInMonth(props.month.getFullYear(), props.month.getMonth())
