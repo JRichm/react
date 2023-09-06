@@ -52,16 +52,22 @@ export function CalendarHeader() {
     return (
         <>
             <span className="flex flex-row justify-between text-xl">
-                <h1 className="p-3">{ viewMonth.toLocaleString('default', {month: 'long'}) }</h1>
                 <span>
-                    <select name="month" placeholder='{currentMonth}'>
-                        {selectMonths}
-                    </select>
-                    <select name="year" placeholder='{currentYear}'>
-                        {selectYears}
-                    </select>
-                    <button>⬅</button>
-                    <button>➞</button>
+                    <h1 className="p-3">{ viewMonth.toLocaleString('default', {month: 'long'}) }</h1>
+                </span>
+                <span className="flex flex-row align-center">
+                    <div className="m-2 flex flex-row align-center">
+                        <select name="month" placeholder='{currentMonth}'>
+                            {selectMonths}
+                        </select>
+                        <select name="year" placeholder='{currentYear}'>
+                            {selectYears}
+                        </select>
+                    </div>
+                    <div className="m-2 flex flex-row align-center">
+                        <button className="m-3">&laquo;</button>
+                        <button className="m-3">&raquo;</button>
+                    </div>
                 </span>
             </span>
         </>
