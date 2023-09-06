@@ -13,7 +13,7 @@ export default function CalendarComponent() {
         <>
             <div className="outline outline-1 p-2 m-5">
                 <CalendarHeader />
-                <Calendar />
+                <Calendar month={viewMonth}/>
             </div>
         </>
     )
@@ -33,19 +33,17 @@ export function CalendarHeader() {
     )
 }
 
-export function Calendar() {
+export function Calendar(props) {
 
-    let month = currentMonth
+    console.log(props.month)
+    console.log(props.month.getDay())
 
-    const numDays = daysInMonth(currentMonth, currentYear)
-    const firstDay = getFirstDayOfWeek(currentMonth, currentYear)
     const dayComponents = [];
+    let dayOfMonth
 
-    console.log("firstDay: ", firstDay)
-
-    for (let day = 1 - firstDay; day <= numDays; day++) {
-        if (day > 0) dayComponents.push(<Day key={day} day={day} />)
-        else dayComponents.push(<Day key={day} day={daysInMonth(currentMonth-1, currentYear) + day} />)
+    for (let i = 0; i <= 30; i++) {
+        dayOfMonth = i - props.month.getDay()
+        dayComponents.push(<Day key={i} day={i - props.month.getDay()} />)
     }
 
     return (
@@ -55,6 +53,24 @@ export function Calendar() {
             </div>
         </>
     )
+
+    // let month = currentMonth
+
+    // const numDays = daysInMonth(viewMonth.getMonth(), viewMonth.getFullYear())
+    // const firstDay = getFirstDayOfWeek(viewMonth.getMonth(), viewMonth.getFullYear())
+    // const dayComponents = [];
+
+    // console.log("firstDay: ", firstDay)
+
+    // for (let day = -2 - firstDay; day <= numDays; day++) {
+    //     if (day > 0) dayComponents.push(<Day key={day} day={day} />)
+    //     else dayComponents.push(<Day key={day} day={daysInMonth(viewMonth.getMonth(), currentYear) + day} />)
+    // }
+
+    // return (
+    //     <>
+    //     </>
+    // )
 }
 
 export function Day(props) {
