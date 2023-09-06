@@ -3,6 +3,7 @@
     "jsx": "preserve",
     "baseUrl": "src/app",
     "paths": {
+      "@/db": ["db"],
       "@/components/*": ["components/*"],
       "@/styles/*": ["styles/*"]
     },

@@ -5,6 +5,7 @@ export default function MainHeader() {
     return (
         <>
             <div className="m-5">
+                <p>no header</p>
             </div>
         </>
     )
