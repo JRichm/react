@@ -138,7 +138,6 @@ export function Day(props) {
                 </div>
             </div>
         </>
-
     )
 }
 
