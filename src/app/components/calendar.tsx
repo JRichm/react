@@ -2,13 +2,11 @@ let currentDate = new Date();
 const currentYear = currentDate.getFullYear();
 const currentMonth = currentDate.getMonth() + 1;
 
-
 let viewMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
 let selectYears = []
 let selectMonths = []
 
 if (!selectYears[0]) {
-    console.log('select years not loaded')
     for (let y = currentYear - 50; y < currentYear + 50; y++) {
         if (y == currentYear) {
             selectYears.push(
@@ -74,7 +72,6 @@ function CalendarHeader() {
 
 export async function Calendar(props) {
 
-    const dates = []
     const dayComponents = [];
     let day;
     const calDate = new Date()
@@ -85,9 +82,6 @@ export async function Calendar(props) {
         day = <Day date={new Date(calDate)} viewMonth={props.month}/>
         dayComponents.push(day)
     }
-
-    let dayOfMonth
-    let numDays = daysInMonth(props.month.getFullYear(), props.month.getMonth())
 
     return (
         <>
@@ -101,7 +95,6 @@ export async function Calendar(props) {
 export function Day(props) {
 
     const date = props.date;
-    let dayNum;
     console.log(props.date);
 
     // className for all days
@@ -140,8 +133,4 @@ export function DateDetails() {
             <p>This is the date details</p>
         </>
     )
-}
-
-var daysInMonth = function(y, m) {
-    return new Date(y, m, 0).getDate()
 }
