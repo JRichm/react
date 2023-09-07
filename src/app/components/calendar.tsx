@@ -1,5 +1,3 @@
-"use client"
-
 let currentDate = new Date();
 const currentYear = currentDate.getFullYear();
 const currentMonth = currentDate.getMonth() + 1;
@@ -36,7 +34,7 @@ if (!selectYears[0]) {
     }
 }
 
-export default function CalendarComponent() {
+export default async function CalendarComponent() {
     return (
         <>
             <div className="outline outline-1 p-2 m-5">
@@ -74,22 +72,22 @@ function CalendarHeader() {
     )
 }
 
-export function Calendar(props) {
+export async function Calendar(props) {
+
+    const dates = []
     const dayComponents = [];
+    let day;
+    const calDate = new Date()
+    calDate.setDate(props.month.getDate() - props.month.getDay() - 1)
+
+    for (let d = 0; d < 42; d++) {
+        calDate.setDate(calDate.getDate() + 1)
+        day = <Day date={new Date(calDate)} viewMonth={props.month}/>
+        dayComponents.push(day)
+    }
+
     let dayOfMonth
     let numDays = daysInMonth(props.month.getFullYear(), props.month.getMonth())
-
-    for (let i = 1; i <= 42; i++) {
-        dayOfMonth = i - props.month.getDay()
-
-        if (dayOfMonth <= 0) {
-            dayComponents.push(<Day key={i} day={daysInMonth(props.month.getFullYear(), props.month.getMonth()) - -dayOfMonth} />)
-        } else if (dayOfMonth < numDays) {
-            dayComponents.push(<Day key={i} day={i - props.month.getDay()} />)
-        } else {
-            dayComponents.push(<Day key={i} day={i - numDays - props.month.getDay() + 1} />)
-        }
-    }
 
     return (
         <>
@@ -119,19 +117,29 @@ export function Calendar(props) {
 }
 
 export function Day(props) {
-    let dayNum;
 
-    if (props.day == currentDate.getDay()) {
-        dayNum = <p className="bg-blue-500 w-6 text-center rounded-full text-white">{props.day}</p>
+    const date = props.date
+    let dayNum;
+    console.log(props.date)
+
+    let className = ""
+    
+    if (date.getMonth() != props.viewMonth.getMonth()) {
+        // previous and next month
+        className += "text-gray-300"
+
+    } else if (date.getDate() == currentDate.getDate() && date.getMonth() == currentDate.getMonth()) {
+        // todays date
+        className += "bg-blue-500"
     } else {
-        dayNum = <p>{props.day}</p>
+        // any other day
     }
 
     return (
         <>
-            <div className="hover:outline hover:outline-1 hover:outline-gray-500 m-1 p-1" onClick={clickDay}>
+            <div className="hover:outline hover:outline-1 hover:outline-gray-500 m-1 p-1">
                 <span>
-                    {dayNum}
+                    <p className={className}>{props.date.getDate()}</p>
                 </span>
                 <div className="h-10">
 
@@ -147,20 +155,6 @@ export function DateDetails() {
             <p>fart</p>
         </>
     )
-}
-
-function getFirstDayOfWeek(month, year) {
-    console.log('params: ', month, year);
-
-    const firstDayOfMonth = new Date(year, month - 1);
-
-    console.log('first day of the month: ', firstDayOfMonth)
-
-    return firstDayOfMonth.getDay();
-}
-
-function clickDay(e) {
-    console.log(e)
 }
 
 var daysInMonth = function(y, m) {
