@@ -96,24 +96,6 @@ export async function Calendar(props) {
             </div>
         </>
     )
-
-    // let month = currentMonth
-
-    // const numDays = daysInMonth(viewMonth.getMonth(), viewMonth.getFullYear())
-    // const firstDay = getFirstDayOfWeek(viewMonth.getMonth(), viewMonth.getFullYear())
-    // const dayComponents = [];
-
-    // console.log("firstDay: ", firstDay)
-
-    // for (let day = -2 - firstDay; day <= numDays; day++) {
-    //     if (day > 0) dayComponents.push(<Day key={day} day={day} />)
-    //     else dayComponents.push(<Day key={day} day={daysInMonth(viewMonth.getMonth(), currentYear) + day} />)
-    // }
-
-    // return (
-    //     <>
-    //     </>
-    // )
 }
 
 export function Day(props) {
