@@ -118,21 +118,24 @@ export async function Calendar(props) {
 
 export function Day(props) {
 
-    const date = props.date
+    const date = props.date;
     let dayNum;
-    console.log(props.date)
+    console.log(props.date);
 
-    let className = ""
+    // className for all days
+    let className = "";
     
+    // days for previous and next month
     if (date.getMonth() != props.viewMonth.getMonth()) {
-        // previous and next month
-        className += "text-gray-300"
+        className += "text-gray-300";
 
+    // todays date
     } else if (date.getDate() == currentDate.getDate() && date.getMonth() == currentDate.getMonth()) {
-        // todays date
-        className += "bg-blue-500"
+        className += "bg-blue-500 w-6 text-center rounded-full text-white";
+
+    // any other day
     } else {
-        // any other day
+        className += "";
     }
 
     return (
@@ -152,7 +155,7 @@ export function Day(props) {
 export function DateDetails() {
     return (
         <>
-            <p>fart</p>
+            <p>This is the date details</p>
         </>
     )
 }
