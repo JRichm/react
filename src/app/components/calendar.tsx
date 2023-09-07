@@ -1,3 +1,5 @@
+import Day from '@/components/day'
+
 let currentDate = new Date();
 const currentYear = currentDate.getFullYear();
 const currentMonth = currentDate.getMonth() + 1;
@@ -79,7 +81,7 @@ export async function Calendar(props) {
 
     for (let d = 0; d < 42; d++) {
         calDate.setDate(calDate.getDate() + 1)
-        day = <Day date={new Date(calDate)} viewMonth={props.month}/>
+        day = <Day date={new Date(calDate)} viewMonth={props.month} currentDate={currentDate} />
         dayComponents.push(day)
     }
 
@@ -87,41 +89,6 @@ export async function Calendar(props) {
         <>
             <div className="grid gap-0 grid-cols-7 w-[800px]">
                 {dayComponents}
-            </div>
-        </>
-    )
-}
-
-export function Day(props) {
-
-    const date = props.date;
-    console.log(props.date);
-
-    // className for all days
-    let className = "";
-    
-    // days for previous and next month
-    if (date.getMonth() != props.viewMonth.getMonth()) {
-        className += "text-gray-300";
-
-    // todays date
-    } else if (date.getDate() == currentDate.getDate() && date.getMonth() == currentDate.getMonth()) {
-        className += "bg-blue-500 w-6 text-center rounded-full text-white";
-
-    // any other day
-    } else {
-        className += "";
-    }
-
-    return (
-        <>
-            <div className="hover:outline hover:outline-1 hover:outline-gray-500 m-1 p-1">
-                <span>
-                    <p className={className}>{props.date.getDate()}</p>
-                </span>
-                <div className="h-10">
-
-                </div>
             </div>
         </>
     )
