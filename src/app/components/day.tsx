@@ -6,6 +6,10 @@ export default function Day(props) {
     let className = "";
     
     // days for previous and next month
+
+    console.log('Day:')
+    console.log(props)
+
     if (date.getMonth() != props.viewMonth.getMonth()) {
         className += "text-gray-300";
 

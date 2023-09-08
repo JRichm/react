@@ -5,6 +5,7 @@ import NewNote from '@/components/newNote'
 
 import '@/styles/styles.css'
 
+const currentDate = new Date()
 export default function HomePage() {
   return (
     <>
