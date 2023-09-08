@@ -1,20 +1,15 @@
-export default function Day(props) {
-
-    const date = props.date;
+export default function Day({date, viewMonth, currentDate, setSelectedDate}) {
 
     // className for all days
     let className = "";
     
     // days for previous and next month
 
-    console.log('Day:')
-    console.log(props)
-
-    if (date.getMonth() != props.viewMonth.getMonth()) {
+    if (date.getMonth() != viewMonth.getMonth()) {
         className += "text-gray-300";
 
     // todays date
-    } else if (date.getDate() == props.currentDate.getDate() && date.getMonth() == props.currentDate.getMonth()) {
+    } else if (date.getDate() == currentDate.getDate() && date.getMonth() == currentDate.getMonth()) {
         className += "bg-blue-500 w-6 text-center rounded-full text-white";
 
     // any other day
@@ -24,9 +19,9 @@ export default function Day(props) {
 
     return (
         <>
-            <div className="hover:outline hover:outline-1 hover:outline-gray-200 m-1 p-1">
+            <div className="hover:outline hover:outline-1 hover:outline-gray-200 m-1 p-1" onClick={setSelectedDate(date)}>
                 <span>
-                    <p className={className}>{props.date.getDate()}</p>
+                    <p className={className}>{date.getDate()}</p>
                 </span>
                 <div className="h-10">
 
