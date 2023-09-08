@@ -19,7 +19,7 @@ export default function Day({date, viewMonth, currentDate, setSelectedDate}) {
 
     return (
         <>
-            <div className="hover:outline hover:outline-1 hover:outline-gray-200 m-1 p-1" onClick={setSelectedDate(date)}>
+            <div className="hover:outline hover:outline-1 hover:outline-gray-200 m-1 p-1" onClick={e => {setSelectedDate(date)}}>
                 <span>
                     <p className={className}>{date.getDate()}</p>
                 </span>

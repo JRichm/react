@@ -37,9 +37,8 @@ if (!selectYears[0]) {
     }
 }
 
-export default function CalendarComponent() {
+export default function CalendarComponent({selectedDate, setSelectedDate}) {
     const [viewMonth, setViewMonth] = useState(new Date());
-    const [selectedDate, setSelectedDate] = useState(new Date());
 
     return (
         <>
@@ -79,9 +78,6 @@ function CalendarHeader({ viewMonth, setViewMonth }) {
 }
 
 export function Calendar({viewMonth, setSelectedDate}) {
-
-    console.log("\nviewMonth")
-    console.log(viewMonth)
 
     const dayComponents = [];
     let day;

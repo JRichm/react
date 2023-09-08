@@ -11,7 +11,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
   return (
     <html>
       <head></head>
-      <body className={`${inter.className} container mx-auto p-4`} >{children}</body>
+      <body className={`${inter.className} container`} >{children}</body>
     </html>
   )
 }
