@@ -35,19 +35,23 @@ function NewNote({addingNote, setAddingnote}) {
     if (addingNote) {
         return (
             <>
-                <form className='flex flex-col my-5 p-2 border border-solid border-black'>
+                <form className='flex flex-col my-5 p-2 border border-solid border-black rounded'>
                     <input type='text' placeholder='note title' className='border-none outline-none m-2'></input>
                     <hr />
-                    <textarea placeholder='new note' className='border-none outline-none m-2'></textarea>
-                    <input type="submit" value={"add"} className='hover:cursor-pointer bg-gray-200 px-3 m-2'></input>
+                    <textarea placeholder='new note' className='border-none outline-none m-2 resize-none'></textarea>
+                    <span className='flex flex-row justify-between'>
+                        <button className='hover:cursor-pointer bg-red-200 px-3 m-2 w-full rounded'>cancel</button>
+                        <input type="submit" value={"add"} className='hover:cursor-pointer bg-gray-200 px-3 m-2 w-full rounded'></input>
+                    </span>
                 </form>
             </>
         )
     } else {
         return (
             <>
-                <img className="h-8 text-center opacity-20 m-6" src="https://cdn3.iconfinder.com/data/icons/eightyshades/512/14_Add-512.png" onClick={e => setAddingnote(true)}></img>
-            </>
+                <div className='w-full flex justify-center'>
+                    <img className="h-6 text-center opacity-20 m-6" src="https://cdn3.iconfinder.com/data/icons/eightyshades/512/14_Add-512.png" onClick={e => setAddingnote(true)}></img>
+                </div></>
         )
     }
 }

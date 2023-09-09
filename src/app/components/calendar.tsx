@@ -42,7 +42,7 @@ export default function CalendarComponent({selectedDate, setSelectedDate}) {
 
     return (
         <>
-            <div className="outline outline-1 p-2 m-5">
+            <div className="outline outline-1 p-2 m-5 rounded">
                 <CalendarHeader viewMonth={ viewMonth } setViewMonth={setViewMonth} />
                 <hr className="mb-2" />
                 <Calendar viewMonth={ viewMonth } setSelectedDate={setSelectedDate} />
