@@ -43,7 +43,7 @@ function NewNote({addingNote, setAddingnote, selectedDate}) {
                     <hr />
                     <textarea placeholder='new note' className='border-none outline-none m-2 resize-none' name="data"></textarea>
                     <span className='flex flex-row justify-between'>
-                        <button className='hover:cursor-pointer bg-red-200 px-3 m-2 w-full rounded' onClick={e => setAddingnote(false)}>cancel</button>
+                        <button className='hover:cursor-pointer bg-red-200 px-3 m-2 w-full rounded' onClick={e => setAddingnote(false)}>Cancel</button>
                         <input type="submit" value={"add"} className='hover:cursor-pointer bg-gray-200 px-3 m-2 w-full rounded'></input>
                     </span>
                 </form>
