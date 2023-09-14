@@ -7,23 +7,17 @@
 //     note
 
 export default function NewNote() {
-    const today = new Date()
-
     return (
         <>
-        <div className="w-1/5">
-            <div>
-                <h1 className="text-2xl m-5">{ today.toLocaleString('default', { month: 'long', day: "numeric" }) }, { today.getFullYear() }</h1>
-            </div>
-            <div className="flex flex-col m-5 p-2 outline outline-1 h-80">
-                <span>
-                    <input placeholder="note title" className="p-2 w-full"></input>
+            <form className="border border-solid border-black rounded my-5 p-2">
+                <input type='text' placeholder='note title' className='border-none outline-none m-2' name='title' /*onChange={handleInputChange} value={formData.title} */></input>
+                <hr />
+                <textarea placeholder='new note' className='border-none outline-none m-2 resize-none' name="data" /* onChange={handleInput} value={formData.data} */></textarea>
+                <span className='flex flex-row justify-between'>
+                        <button className='hover:cursor-pointer bg-red-200 px-3 m-2 w-full rounded'>Cancel</button>
+                        <input type="submit" value={"add"} className='hover:cursor-pointer bg-gray-200 px-3 m-2 w-full rounded'></input>
                 </span>
-                <hr className="m-2" />
-                <textarea placeholder="note" className="h-full p-2"></textarea>
-                <button className="bg-gray-300 mt-2">add note</button>
-            </div>
-        </div>
+            </form>
         </>
     )
 }
