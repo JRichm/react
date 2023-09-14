@@ -1,14 +1,31 @@
 import NewNote from "@/components/newNote"
 import { get_notes_for_date } from "@/../crud"
+import { useEffect, useState } from 'react'
 
-export default async function DateDetails({selectedDate}) {
+export default function DateDetails({ selectedDate }) {
+
+    const [notes, setNotes] = useState([])
+
+    useEffect(() => {
+        async function fetchNotes() {
+            try {
+                const notes = await get_notes_for_date(selectedDate)
+                setNotes(notes)
+            } catch (error) {
+                console.error('Error fetching notes: ', error)
+            }
+        }
+
+        fetchNotes()
+    }, [selectedDate])
+
     return (
         <>
             <div className="m-5 p-2 w-full">
                 <h1 className="text-xl p-3">{ selectedDate.toLocaleString('default', { month: 'long', day: "numeric" }) }, { selectedDate.getFullYear() }</h1>
                 <hr className="w-full"></hr>
                 <ul className="marker:text-black list-disc p-5 space-y-3">
-                    <NoteElements notes={await get_notes_for_date(selectedDate)}/>
+                    <NoteElements notes={notes}/>
                 </ul>
                 <hr />
                 <NewNote />
@@ -17,25 +34,21 @@ export default async function DateDetails({selectedDate}) {
     )
 }
 
-
-async function NoteElements(notes) {
-    const noteElements = notes.map((note) => {
+function NoteElements({ notes }) {
+    const noteElements = notes.map((note) => (
         <li key={note.id}>
-            <div>ID: {note.id}</div>
-            <div>Title: {note.title}</div>
-            <div>Note: {note.note}</div>
+            <div>{note.title}</div>
         </li>
-    })
+    ))
+    console.log(noteElements)
 
-    let dateElements = (
-        <>
-            <p>no date elements</p>
-        </>
-    )
+    if (noteElements.length === 0) {
+        return
+    }
 
     return (
-        <>
-            { noteElements }
+        <>  
+            {noteElements}
         </>
     )
 }
