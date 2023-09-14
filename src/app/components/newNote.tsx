@@ -6,11 +6,6 @@
 //     note title
 //     note
 
-
-
-
-
-
 export default function NewNote() {
     const today = new Date()
 

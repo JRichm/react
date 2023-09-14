@@ -36,12 +36,36 @@ export default function DayDetails({selectedDate, dateNotes}) {
 function NewNote({addingNote, setAddingnote, selectedDate}) {
     if (addingNote) {
 
+        const [formData, setFormData] = useState({title: '', data: ''})
+
+        const handleAddNewNote = (e) => {
+            e.preventDefault();
+
+            const { title, data } = formData;
+
+            const fromDataObject = new FormData();
+            fromDataObject.append('title', title);
+            fromDataObject.append('data', data);
+
+            addNote(fromDataObject, selectedDate);
+
+            setFormData({ title: '', data: ''});
+        }
+
+        const handleInputChange = (e) => {
+            const { name, value } = e.target;
+            setFormData({
+                ...formData,
+                [name]: value
+            })
+        }
+
         return (
             <>
-                <form className='flex flex-col my-5 p-2 border border-solid border-black rounded' onSubmit={e => {addNote}}>
-                    <input type='text' placeholder='note title' className='border-none outline-none m-2' name="title"></input>
+                <form className='flex flex-col my-5 p-2 border border-solid border-black rounded' onSubmit={handleAddNewNote}>
+                    <input type='text' placeholder='note title' className='border-none outline-none m-2' name="title" onChange={handleInputChange} value={formData.title}></input>
                     <hr />
-                    <textarea placeholder='new note' className='border-none outline-none m-2 resize-none' name="data"></textarea>
+                    <textarea placeholder='new note' className='border-none outline-none m-2 resize-none' name="data" onChange={handleInputChange} value={formData.data}></textarea>
                     <span className='flex flex-row justify-between'>
                         <button className='hover:cursor-pointer bg-red-200 px-3 m-2 w-full rounded' onClick={e => setAddingnote(false)}>Cancel</button>
                         <input type="submit" value={"add"} className='hover:cursor-pointer bg-gray-200 px-3 m-2 w-full rounded'></input>

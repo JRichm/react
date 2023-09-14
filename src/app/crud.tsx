@@ -16,6 +16,10 @@ export async function addNote(data: FormData, selectedDate) {
     const noteTitle = data.get("title")?.valueOf()
     const noteData = data.get("data")?.valueOf()
     
+    console.log('\tnew note to add\n')
+    console.log(noteTitle)
+    console.log(noteData)
+
     if (typeof noteTitle !== "string" || noteTitle.length === 0) {
         throw new Error("Invalid Note Title");
     } else if (typeof noteData !== "string" || noteData.length === 0) {
