@@ -35,7 +35,7 @@ async function NoteElements(notes) {
 
     return (
         <>
-            { dateElements }
+            { noteElements }
         </>
     )
 }
