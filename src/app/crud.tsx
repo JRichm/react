@@ -1,7 +1,7 @@
 'use server'
 import { prisma } from "@/db"
 
-export async function notes_for_date(date) {
+export async function get_notes_for_date(date) {
     const notes = await prisma.calendarNote.findMany({
         where: {
             dateAttatched: date,
@@ -10,7 +10,6 @@ export async function notes_for_date(date) {
     
     return notes
 }
-
 
 export async function addNote(data: FormData, selectedDate) {
     const noteTitle = data.get("title")?.valueOf()

@@ -1,22 +1,22 @@
+"use client"
 import React, { useState } from 'react';
 import { prisma } from "@/db"
-import { addNote } from "@/../crud"
+import { addNote, get_notes_for_date } from "@/../crud"
+import { useServerData } from "@/components/dayDetails.server"
 let fakeNotes = ['note 1', 'note 2']
 
-export default function DayDetails({selectedDate, dateNotes}) {
-
+export default async function DayDetails({selectedDate}) {
     const [addingNote, setAddingnote] = useState(false);
 
-    let noteElements = [];
+    const { noteQuery } = await useServerData(selectedDate);
 
-    dateNotes.forEach(note => {
-        noteElements.push(
-            <>
-                <li>{ note }</li>
-            </>
-        )
-    })
-    
+    const noteElements = noteQuery.map((note) => (
+        <li key={note.id}>
+            <div>ID: {note.id}</div>
+            <div>Title: {note.title}</div>
+            <div>Note: {note.note}</div>
+        </li> 
+    ))    
 
     return(
         <> 
