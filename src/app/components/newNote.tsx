@@ -1,17 +1,14 @@
-// react component for adding a new 'Note' on a specific day on the calendar
 import { useState } from 'react'
 import { add_note } from 'crud';
-
-// details needed for note submission
-//     note date
-//     note title
-//     note
 
 export default function NewNote({ selectedDate }) {
 
     const [formData, setFormData] = useState({ title: '', note: '' })
 
+    // handle user input
     function handleInputChange(e) {
+
+        // update user input
         const { name, value } = e.target;
         setFormData({
             ...formData,
@@ -21,19 +18,21 @@ export default function NewNote({ selectedDate }) {
 
     function submitNewNote(e) {
         e.preventDefault()
-        console.log('submitting new note: ', formData)
 
+        // create formData object
         const {title, note} = formData;
         const formDataObject = new FormData()
         formDataObject.append('title', title)
         formDataObject.append('note', note)
 
+        // call crud to add note to database
         try {
             add_note(formDataObject, selectedDate)
         } catch (error) {
             console.log(error)
         }
 
+        // reset  user input
         setFormData({title: '', note: ''})
     }
 

@@ -1,16 +1,11 @@
-'use server'
+// // CRUD file hold functions that interact with the database
+
 import { prisma } from "@/db"
 
-export async function get_notes_for_date(date) {
-    const notes = await prisma.calendarNote.findMany({
-        where: {
-            dateAttatched: date,
-        },
-    })
-    
-    return notes
-}
 
+// // CREATE
+
+// adds a note to the db
 export async function add_note(data: FormData, selectedDate) {
     const noteTitle = data.get("title")?.valueOf()
     const note = data.get("note")?.valueOf()
@@ -30,3 +25,23 @@ export async function add_note(data: FormData, selectedDate) {
     })
     console.log('added note titled: ', noteTitle)
 }
+
+
+// // READ
+
+// return a list of notes for a specific date
+export async function get_notes_for_date(date) {
+    const notes = await prisma.calendarNote.findMany({
+        where: {
+            dateAttatched: date,
+        },
+    })
+    
+    return notes
+}
+
+
+// // EDIT
+
+
+// // DELETE

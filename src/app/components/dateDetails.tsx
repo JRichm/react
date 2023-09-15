@@ -4,8 +4,10 @@ import { useEffect, useState } from 'react'
 
 export default function DateDetails({ selectedDate }) {
 
+    // assign note state for selected day
     const [notes, setNotes] = useState([])
 
+    // get notes for selected date
     useEffect(() => {
         async function fetchNotes() {
             try {
@@ -34,18 +36,22 @@ export default function DateDetails({ selectedDate }) {
     )
 }
 
+// create elements for each note retrieved from the database
 function NoteElements({ notes }) {
+
+    // loop through notes for day
     const noteElements = notes.map((note) => (
         <li key={note.id}>
             <div>{note.title}</div>
         </li>
     ))
-    console.log(noteElements)
 
+    // if no notes are found
     if (noteElements.length === 0) {
-        return
+        return false
     }
 
+    // return elements containing notes
     return (
         <>  
             {noteElements}
