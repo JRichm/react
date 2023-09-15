@@ -37,7 +37,7 @@ if (!selectYears[0]) {
     }
 }
 
-export default function CalendarComponent({selectedDate, setSelectedDate}) {
+export default function CalendarComponent({selectedDate, onDateClick}) {
     const [viewMonth, setViewMonth] = useState(new Date());
 
     return (
@@ -45,7 +45,7 @@ export default function CalendarComponent({selectedDate, setSelectedDate}) {
             <div className="outline outline-1 p-2 m-5 rounded">
                 <CalendarHeader viewMonth={ viewMonth } setViewMonth={setViewMonth} />
                 <hr className="mb-2" />
-                <Calendar viewMonth={ viewMonth } setSelectedDate={setSelectedDate} />
+                <Calendar viewMonth={ viewMonth } onDateClick={onDateClick} />
             </div>
         </>
     )
@@ -77,7 +77,7 @@ function CalendarHeader({ viewMonth, setViewMonth }) {
     )
 }
 
-export async function Calendar({viewMonth, setSelectedDate}) {
+export function Calendar({viewMonth, onDateClick}) {
 
     const dayComponents = [];
     let day;
@@ -87,7 +87,7 @@ export async function Calendar({viewMonth, setSelectedDate}) {
     for (let d = 0; d < 42; d++) {
         calDate.setDate(calDate.getDate() + 1)
 
-        day = <Day date={new Date(calDate)} viewMonth={viewMonth} currentDate={currentDate} setSelectedDate={setSelectedDate}/>
+        day = <Day date={new Date(calDate)} viewMonth={viewMonth} currentDate={currentDate} onDateClick={onDateClick}/>
         dayComponents.push(day)
     }
 

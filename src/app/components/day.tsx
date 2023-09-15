@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { get_notes_for_date } from "crud";
 
-export default function Day({date, viewMonth, currentDate, setSelectedDate}) {
+export default function Day({date, viewMonth, currentDate, onDateClick}) {
     
     const [notes, setNotes] = useState([])
 
@@ -37,7 +37,7 @@ export default function Day({date, viewMonth, currentDate, setSelectedDate}) {
 
     return (
         <>
-            <div className="hover:outline hover:outline-1 hover:outline-gray-200 m-1 p-1" onClick={e => {setSelectedDate(date)}}>
+            <div className="hover:outline hover:outline-1 hover:outline-gray-200 m-1 p-1" onClick={e => {onDateClick(date)}}>
                 <span>
                     <p className={className}>{date.getDate()}</p>
                 </span>
