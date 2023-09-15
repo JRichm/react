@@ -1,4 +1,22 @@
+import { useState, useEffect } from 'react';
+import { get_notes_for_date } from "crud";
+
 export default function Day({date, viewMonth, currentDate, setSelectedDate}) {
+    
+    const [notes, setNotes] = useState([])
+
+    useEffect(() => {
+        async function fetchNotes() {
+            try {
+                const fetchedNotes = await get_notes_for_date(date);
+                setNotes(fetchedNotes)
+            } catch(error) {
+                console.error(error)
+            }
+        }
+
+        fetchNotes();
+    }, [date]);
 
     // className for all days
     let className = "";
@@ -24,7 +42,9 @@ export default function Day({date, viewMonth, currentDate, setSelectedDate}) {
                     <p className={className}>{date.getDate()}</p>
                 </span>
                 <div className="h-10">
-
+                    {notes.map((note) => (
+                        <p>•</p>)
+                    )}
                 </div>
             </div>
         </>

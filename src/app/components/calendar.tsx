@@ -1,8 +1,8 @@
-'use client'
-
 import React, { useState } from 'react';
+import { prisma } from "@/db"
 
 import Day from '@/components/day'
+import { get_notes_for_date } from 'crud';
 
 let currentDate = new Date();
 const currentYear = currentDate.getFullYear();
@@ -77,7 +77,7 @@ function CalendarHeader({ viewMonth, setViewMonth }) {
     )
 }
 
-export function Calendar({viewMonth, setSelectedDate}) {
+export async function Calendar({viewMonth, setSelectedDate}) {
 
     const dayComponents = [];
     let day;
@@ -86,6 +86,7 @@ export function Calendar({viewMonth, setSelectedDate}) {
 
     for (let d = 0; d < 42; d++) {
         calDate.setDate(calDate.getDate() + 1)
+
         day = <Day date={new Date(calDate)} viewMonth={viewMonth} currentDate={currentDate} setSelectedDate={setSelectedDate}/>
         dayComponents.push(day)
     }

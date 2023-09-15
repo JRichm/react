@@ -1,5 +1,5 @@
 // // CRUD file hold functions that interact with the database
-
+"use server"
 import { prisma } from "@/db"
 
 
