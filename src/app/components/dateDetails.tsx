@@ -28,7 +28,7 @@ export default function DateDetails({ selectedDate }) {
                     <NoteElements notes={notes}/>
                 </ul>
                 <hr />
-                <NewNote />
+                <NewNote selectedDate={selectedDate} />
             </div>
         </>
     )

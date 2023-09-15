@@ -11,22 +11,22 @@ export async function get_notes_for_date(date) {
     return notes
 }
 
-export async function addNote(data: FormData, selectedDate) {
+export async function add_note(data: FormData, selectedDate) {
     const noteTitle = data.get("title")?.valueOf()
-    const noteData = data.get("data")?.valueOf()
+    const note = data.get("note")?.valueOf()
     
     console.log('\tnew note to add\n')
     console.log(noteTitle)
-    console.log(noteData)
+    console.log(note)
 
     if (typeof noteTitle !== "string" || noteTitle.length === 0) {
         throw new Error("Invalid Note Title");
-    } else if (typeof noteData !== "string" || noteData.length === 0) {
+    } else if (typeof note !== "string" || note.length === 0) {
         throw new Error("Invalid Note Data");
     }
 
     await prisma.calendarNote.create({data:
-        {title: noteTitle, note: noteData, dateAttatched: selectedDate}
+        {title: noteTitle, note: note, dateAttatched: selectedDate}
     })
     console.log('added note titled: ', noteTitle)
 }
