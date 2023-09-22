@@ -38,6 +38,7 @@ export default async function Grocery() {
             <div className='flex flex-row'>
                 <LeftNav />
                 <div className='m-12'>
+                    <h1 className='text-3xl m-3'>Grocery List</h1>
                     <div>
                         <form action={addGroceryItem}>
                             <input name="itemInput" type="text" placeholder='+ add item'></input>
