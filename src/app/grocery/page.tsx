@@ -62,4 +62,4 @@ export default async function Grocery() {
             </div>
         </>
     )
-}
+} 
