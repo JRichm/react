@@ -47,6 +47,7 @@ export default function NewNote({ selectedDate }) {
                         <input type="submit" value={"add"} className='hover:cursor-pointer bg-gray-200 px-3 m-2 w-full rounded'></input>
                 </span>
             </form>
+            {/* add color buttons */}
         </>
     )
 }
