@@ -29,9 +29,18 @@ model CalendarNote {
 }
 
 model GroceryItem {
-  id            String @id @default(uuid())
+  id            String    @id @default(uuid())
   itemName      String
   active        Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model JournalEntry {
+  id            String @id @default(uuid())
+  entryTitle    String
+  entryText     String 
+  entryImageID  String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 }

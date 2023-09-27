@@ -1,8 +1,10 @@
 import JournalEntry from './components/journalEntry'
+import { prisma } from "@/db"
 
-function getJournalEntries() {
+async function getJournalEntries() {
+    const journalEntries = await prisma.journalEntry.findMany()
+
     const journalElements = []
-    const journalEntries = ['entry 1', 'entry 2', 'entry 3']
 
     journalEntries.forEach(entry => {
         journalElements.push(JournalEntry(entry))
@@ -12,7 +14,7 @@ function getJournalEntries() {
 }
 
 export default async function Blog() {
-    const journalEntries = await getJournalEntries()
+    const journalElements = await getJournalEntries()
 
     const todaysDate = new Date()
 
@@ -33,7 +35,7 @@ export default async function Blog() {
                 </div>
                 <div className='flex justify-center'>
                     <div className='w-1/2'>
-                        {journalEntries}
+                        {journalElements}
                     </div>
                 </div>
             </div>
