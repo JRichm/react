@@ -14,13 +14,15 @@ function getJournalEntries() {
 export default async function Blog() {
     const journalEntries = await getJournalEntries()
 
+    const todaysDate = new Date()
+
     return (
         <>
             <div className="w-full flex flex-col align-center">
                 <div className='flex justify-center'>
                     <div style={{backgroundColor: '#dddddd'}} className='w-1/2 h-36 flex flex-col justify-between p-3'>
                         <span className='flex flex-row justify-between'> 
-                            <p> date </p>
+                            <p>{todaysDate.toLocaleDateString()}</p>
                             <a href="/journal/new">✎ new entry</a>
                         </span>
                         <span className='flex flex-row justify-between'> 
