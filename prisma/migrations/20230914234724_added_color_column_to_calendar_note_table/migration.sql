@@ -15,6 +15,7 @@ CREATE TABLE "new_CalendarNote" (
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL
 );
+
 INSERT INTO "new_CalendarNote" ("createdAt", "dateAttatched", "id", "note", "title", "updatedAt") SELECT "createdAt", "dateAttatched", "id", "note", "title", "updatedAt" FROM "CalendarNote";
 DROP TABLE "CalendarNote";
 ALTER TABLE "new_CalendarNote" RENAME TO "CalendarNote";

@@ -13,6 +13,8 @@ export default function LeftNav() {
                     <hr></hr>
                     <Link href='/grocery'>Grocery List</Link>
                     <hr></hr>
+                    <Link href='/journal'>Journal</Link>
+                    <hr></hr>
             </div>
         </>
     )
