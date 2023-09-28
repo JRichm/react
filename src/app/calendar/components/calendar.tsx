@@ -51,24 +51,58 @@ export default function Calendar() {
 
     return (
         <>
-            <div className="m-12 border border-1 border-black rounded-md">
-                <div className="flex flex-row gap-4 align-center justify-between m-3">
-                    <div className="flex flex-col justify-center">
-                        <h1 className="text-xl">{ viewMonth.toLocaleString('default', { month: 'long' }) } { viewMonth.getFullYear() }</h1>
+            <div className='flex flex-col gap-5 m-12'>
+                <div className="border border-1 border-black rounded-md">
+                    <div className="flex flex-row gap-4 align-center justify-between m-3">
+                        <div className="flex flex-col justify-center">
+                            <h1 className="text-xl">{ viewMonth.toLocaleString('default', { month: 'long' }) } { viewMonth.getFullYear() }</h1>
+                        </div>
+                        <div className="flex flex-col">
+                            <p className="">{ firstDay.toLocaleString('default', { month: 'long', day: "numeric" }) } - { lastDay.toLocaleString('default', { month: 'long', day: "numeric" }) }</p>
+                            <span className="flex flex-row gap-4 font-bold justify-end">
+                                <button className="m-1" onClick={(e) => {setViewMonth(new Date(firstDay.setMonth(firstDay.getMonth() - 1)))}}>&laquo;</button>
+                                <button className="m-1" onClick={(e) => {setViewMonth(new Date(firstDay.setMonth(firstDay.getMonth() + 2)))}}>&raquo;</button>
+                            </span>
+                        </div>
                     </div>
-                    <div className="flex flex-col">
-                        <p className="">{ firstDay.toLocaleString('default', { month: 'long', day: "numeric" }) } - { lastDay.toLocaleString('default', { month: 'long', day: "numeric" }) }</p>
-                        <span className="flex flex-row gap-4 font-bold justify-end">
-                            <button className="m-1" onClick={(e) => {setViewMonth(new Date(firstDay.setMonth(firstDay.getMonth() - 1)))}}>&laquo;</button>
-                            <button className="m-1" onClick={(e) => {setViewMonth(new Date(firstDay.setMonth(firstDay.getMonth() + 2)))}}>&raquo;</button>
-                        </span>
+                    <hr />
+                    <div>
+                        <div className="grid gap-0 grid-cols-7 w-[800px]">
+                            {dayElements}
+                        </div>
                     </div>
                 </div>
-                <hr />
-                <div>
-                    <div className="grid gap-0 grid-cols-7 w-[800px]">
-                        {dayElements}
-                    </div>
+                <div className='border border-1 border-gray-200 rounded shadow'>
+                    <form className='flex flex-row'>
+                        <div className='flex flex-col w-2/3 shadow-sm border border-1 border-gray-200 p-1 m-2'>
+                            <input type='text' placeholder='note title' className='outline-none p-2'></input>
+                            <hr />
+                            <textarea placeholder='new note' className='outline-none p-2 h-36 resize-none'></textarea>
+                        </div>
+                        <div className='flex flex-col w-1/3 justify-between'>
+                            <div className='flex flex-row justify-center'>
+                                <input name='date-from' type='date' className='w-fit m-5'></input>
+                            </div>
+                            <div className='flex flex-col'>
+                                <div className='grid gap-1 grid-cols-6 h-fit w-fit [&>button]:rounded-full self-center m-3 [&>button]:shadow [&>button]:border [&>button]:border-black/30'>
+                                    <button className='bg-red-500 text-red-500 w-9 h-6'>•</button>
+                                    <button className='bg-orange-400 text-orange-400 w-9 h-6'>•</button>
+                                    <button className='bg-yellow-300 text-yellow-300 w-9 h-6'>•</button>
+                                    <button className='bg-green-500 text-green-500 w-9 h-6'>•</button>
+                                    <button className='bg-blue-500 text-blue-500 w-9 h-6'>•</button>
+                                    <button className='bg-purple-500 text-purple-500 w-9 h-6'>•</button>
+                                    <button className='bg-slate-200 text-slate-200 w-9 h-6'>•</button>
+                                    <button className='bg-gray-300 text-gray-300 w-9 h-6'>•</button>
+                                    <button className='bg-zinc-600 text-zinc-600 w-9 h-6'>•</button>
+                                    <button className='bg-neutral-800 text-neutral-800 w-9 h-6'>•</button>
+                                </div>
+                                <div className='grid grid-cols-2 gap-2 m-2 w-fit self-end'>
+                                    <button className='border border-1 border-black rounded p-1'>Cancel</button>
+                                    <button className='border border-1 border-black rounded p-1'>Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </>

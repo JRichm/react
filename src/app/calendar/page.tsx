@@ -3,9 +3,7 @@ import Calendar from './components/calendar'
 import { prisma } from "@/db"
 
 
-export default async function CalendarPage() {    
-
-    const currentDate = new Date()
+export default async function CalendarPage() {
 
     return (
         <>
@@ -14,7 +12,7 @@ export default async function CalendarPage() {
                     <LeftNav />
                 </div>
                 <div>
-                    <Calendar viewDate={currentDate} />
+                    <Calendar />
                 </div>
             </div>
         </>
