@@ -10,6 +10,7 @@ export default function Calendar() {
 
     const [viewMonth, setViewMonth] = useState(new Date())
     const [notesForMonth, setNotesForMonth] = useState([])
+    const [selectedDate, setSelectedDate] = useState(new Date())
 
     // get first day of the calendar ( start calendar on sunday )
     const firstDay = new Date(viewMonth.getFullYear(), viewMonth.getMonth())
@@ -45,7 +46,7 @@ export default function Calendar() {
             }
         }
 
-        let day = <Day date={new Date(loopDay)} notes={noteData} />
+        let day = <Day date={new Date(loopDay)} notes={noteData} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
         dayElements.push(day)
     }
 
@@ -74,14 +75,14 @@ export default function Calendar() {
                 </div>
                 <div className='border border-1 border-gray-200 rounded shadow'>
                     <form className='flex flex-row'>
-                        <div className='flex flex-col w-2/3 shadow-sm border border-1 border-gray-200 p-1 m-2'>
+                        <div className='flex flex-col w-2/3 shadow-sm border border-1 border-gray-200 p-1 m-2 rounded'>
                             <input type='text' placeholder='note title' className='outline-none p-2'></input>
                             <hr />
                             <textarea placeholder='new note' className='outline-none p-2 h-36 resize-none'></textarea>
                         </div>
                         <div className='flex flex-col w-1/3 justify-between'>
                             <div className='flex flex-row justify-center'>
-                                <input name='date-from' type='date' className='w-fit m-5'></input>
+                                <input name='date-from' type='date' className='w-fit m-5' value={selectedDate.toISOString().split('T')[0]} onChange={e => setSelectedDate(new Date(e.target.value))}></input>
                             </div>
                             <div className='flex flex-col'>
                                 <div className='grid gap-1 grid-cols-6 h-fit w-fit [&>button]:rounded-full self-center m-3 [&>button]:shadow [&>button]:border [&>button]:border-black/30'>
@@ -97,8 +98,8 @@ export default function Calendar() {
                                     <button className='bg-neutral-800 text-neutral-800 w-9 h-6'>•</button>
                                 </div>
                                 <div className='grid grid-cols-2 gap-2 m-2 w-fit self-end'>
-                                    <button className='border border-1 border-black rounded p-1'>Cancel</button>
-                                    <button className='border border-1 border-black rounded p-1'>Add</button>
+                                    <button className='border border-1 border-black/20 rounded p-1 bg-red-400/75 text-red-800/90 hover:text-black/75 hover:border-black/50'>Cancel</button>
+                                    <button className='border border-1 border-black/20 rounded p-1 bg-green-500/50 text-green-800/90 hover:text-black/75 hover:border-black/50'>Add</button>
                                 </div>
                             </div>
                         </div>

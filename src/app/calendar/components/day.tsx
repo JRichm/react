@@ -1,17 +1,8 @@
 "use client"
-import React, { useState } from 'react';
 
-export default function Day({date, notes}) {
-
-    const [calDate, setCalDate] = useState(date)
-
+export default function Day({date, notes, selectedDate}) {
+    let style
     console.log(date.getDate(), notes)
-
-
-
-    function updateDay({date, notes}) {
-        setCalDate(date)
-    }
 
     function noteDotElements() {
         let noteDots = []
@@ -24,9 +15,15 @@ export default function Day({date, notes}) {
         return noteDots
     }
 
+    if (date == selectedDate) {
+        style = 'border border-black border-1'
+    } else {
+        style = ''
+    }
+
     return (
         <>
-            <div className="hover:outline hover:outline-1 hover:outline-gray-200 m-1 p-1 h-16">
+            <div className={`${style} hover:outline hover:outline-1 hover:outline-gray-200 m-1 p-1 h-16`}>
                 <div>
                     <span>
                         <p className='p-0 m-0'>{date.getDate()}</p>
