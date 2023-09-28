@@ -4,14 +4,25 @@ import React, { useState } from 'react';
 export default function Day({date, notes}) {
 
     const [calDate, setCalDate] = useState(date)
-    const [dayNotes, setDayNotes] = useState(notes)
-    let noteDots = []
 
-    dayNotes.forEach(note => {
-        noteDots.push(
-            <p className='p-0 m-0 w-0 h-0'>•</p>
-        )
-    })
+    console.log(date.getDate(), notes)
+
+
+
+    function updateDay({date, notes}) {
+        setCalDate(date)
+    }
+
+    function noteDotElements() {
+        let noteDots = []
+        notes.forEach(note => {
+            noteDots.push(
+                <p className=''>•</p>
+            )
+        })
+
+        return noteDots
+    }
 
     return (
         <>
@@ -20,8 +31,8 @@ export default function Day({date, notes}) {
                     <span>
                         <p className='p-0 m-0'>{calDate.getDate()}</p>
                     </span>
-                    <div className='p-0 h-0 m-0'>
-                        {noteDots}
+                    <div className='flex flex-row'>
+                        {noteDotElements()}
                     </div>
                 </div>
             </div>

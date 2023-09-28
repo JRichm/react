@@ -1,7 +1,12 @@
 import LeftNav from '@/components/nav'
 import Calendar from './components/calendar'
+import { prisma } from "@/db"
 
-export default function CalendarPage() {
+
+export default async function CalendarPage() {    
+
+    const currentDate = new Date()
+
     return (
         <>
             <div className='flex flex-row'>   
@@ -9,7 +14,7 @@ export default function CalendarPage() {
                     <LeftNav />
                 </div>
                 <div>
-                    <Calendar />
+                    <Calendar viewDate={currentDate} />
                 </div>
             </div>
         </>
