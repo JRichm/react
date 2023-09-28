@@ -2,7 +2,7 @@ import MainHeader from '@/components/header'
 import { Inter } from 'next/font/google' // built in google fonts
 
 const inter = Inter({ subsets: ['latin'] })
-const classN = `${inter.className} w-full`
+const classN = `${inter.className} w-full h-full`
 
 export const metadata = {
   title: 'Calendar'

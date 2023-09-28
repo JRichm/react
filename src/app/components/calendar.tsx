@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { prisma } from "@/db"
 
 import Day from '@/components/day'
 import { get_notes_for_date } from 'crud';
