@@ -24,7 +24,7 @@ export default async function Blog() {
                 <div className='flex justify-center'>
                     <div style={{backgroundColor: '#dddddd'}} className='w-1/2 h-36 flex flex-col justify-between p-3'>
                         <span className='flex flex-row justify-between'> 
-                            <p>{todaysDate.toLocaleDateString()}</p>
+                            <p>{todaysDate.toLocaleDateString()}</p> 
                             <a href="/journal/new">✎ new entry</a>
                         </span>
                         <span className='flex flex-row justify-between'> 
