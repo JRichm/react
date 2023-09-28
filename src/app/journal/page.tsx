@@ -2,7 +2,11 @@ import JournalEntry from './components/journalEntry'
 import { prisma } from "@/db"
 
 async function getJournalEntries() {
-    const journalEntries = await prisma.journalEntry.findMany()
+    const journalEntries = await prisma.journalEntry.findMany({
+        orderBy: {
+            createdAt: 'desc'
+        }
+    })
 
     const journalElements = []
 

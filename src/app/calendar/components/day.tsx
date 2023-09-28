@@ -29,7 +29,7 @@ export default function Day({date, notes}) {
             <div className="hover:outline hover:outline-1 hover:outline-gray-200 m-1 p-1 h-16">
                 <div>
                     <span>
-                        <p className='p-0 m-0'>{calDate.getDate()}</p>
+                        <p className='p-0 m-0'>{date.getDate()}</p>
                     </span>
                     <div className='flex flex-row'>
                         {noteDotElements()}
