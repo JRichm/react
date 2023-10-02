@@ -1,6 +1,6 @@
 "use client"
 
-export default function Day({date, notes, selectedDate}) {
+export default function Day({date, notes, selectedDate, setSelectedDate}) {
     let selectedStyle
     let currentDateStyle
     console.log(date.getDate(), notes)
@@ -9,7 +9,7 @@ export default function Day({date, notes, selectedDate}) {
         let noteDots = []
         notes.forEach(note => {
             noteDots.push(
-                <p className=''>•</p>
+                <p>•</p>
             )
         })
 
@@ -29,7 +29,7 @@ export default function Day({date, notes, selectedDate}) {
 
     return (
         <>
-            <div className={`${selectedStyle} hover:outline hover:outline-1 hover:outline-gray-200 m-1 p-1 h-16`}>
+            <div className={`${selectedStyle} hover:outline hover:outline-1 hover:outline-gray-200 m-1 p-1 h-16`} onClick={e => setSelectedDate(date)}>
                 <div>
                     <span>
                         <p className={`w-6 h-6 text-center  ${currentDateStyle}`}>{date.getDate()}</p>

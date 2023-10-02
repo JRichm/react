@@ -4,9 +4,22 @@ import React, { useState, useEffect } from 'react';
 import '@/styles/styles.css'
 import Day from "./day"
 import { getNotesForMonth } from './crud'
+import { text } from 'stream/consumers';
+
+{/* <button className='bg-red-500 text-red-500 w-9 h-6'>•</button>
+<button className='bg-orange-400 text-orange-400 w-9 h-6'>•</button>
+<button className='bg-yellow-300 text-yellow-300 w-9 h-6'>•</button>
+<button className='bg-green-500 text-green-500 w-9 h-6'>•</button>
+<button className='bg-blue-500 text-blue-500 w-9 h-6'>•</button>
+<button className='bg-purple-500 text-purple-500 w-9 h-6'>•</button>
+<button className='bg-slate-200 text-slate-200 w-9 h-6'>•</button>
+<button className='bg-gray-300 text-gray-300 w-9 h-6'>•</button>
+<button className='bg-zinc-600 text-zinc-600 w-9 h-6'>•</button>
+<button className='bg-neutral-800 text-neutral-800 w-9 h-6'>•</button> */}
 
 export default function Calendar() {
     const dayElements = []
+    const noteColors = ['red-500', 'orange-400', 'yellow-300', 'green-500', 'blue-500', 'purple-500', 'slate-200', 'gray-300', 'zinc-600', 'neutral-800']
 
     const [viewMonth, setViewMonth] = useState(new Date())
     const [notesForMonth, setNotesForMonth] = useState([])
@@ -53,7 +66,7 @@ export default function Calendar() {
     return (
         <>
             <div className='flex flex-col gap-5 m-12'>
-                <div className="border border-1 border-black rounded-md">
+                <div className="border border-1 border-gray-200 rounded-md shadow shadow-gray-400">
                     <div className="flex flex-row gap-4 align-center justify-between m-3">
                         <div className="flex flex-col justify-center">
                             <h1 className="text-xl">{ viewMonth.toLocaleString('default', { month: 'long' }) } { viewMonth.getFullYear() }</h1>
@@ -61,7 +74,7 @@ export default function Calendar() {
                         <div className="flex flex-col">
                             <p className="">{ firstDay.toLocaleString('default', { month: 'long', day: "numeric" }) } - { lastDay.toLocaleString('default', { month: 'long', day: "numeric" }) }</p>
                             <span className="flex flex-row gap-4 font-bold justify-end">
-                                <button className="m-1" onClick={(e) => {setViewMonth(new Date(firstDay.setMonth(firstDay.getMonth() - 1)))}}>&laquo;</button>
+                                <button className="m-1" onClick={(e) => {setViewMonth(new Date(firstDay.setMonth(firstDay.getMonth())))}}>&laquo;</button>
                                 <button className="m-1" onClick={(e) => {setViewMonth(new Date(firstDay.setMonth(firstDay.getMonth() + 2)))}}>&raquo;</button>
                             </span>
                         </div>
@@ -85,7 +98,11 @@ export default function Calendar() {
                                 <input name='date-from' type='date' className='w-fit m-5' value={selectedDate.toISOString().split('T')[0]} onChange={e => setSelectedDate(new Date(e.target.value))}></input>
                             </div>
                             <div className='flex flex-col'>
-                                <div className='grid gap-1 grid-cols-6 h-fit w-fit [&>button]:rounded-full self-center m-3 [&>button]:shadow [&>button]:border [&>button]:border-black/30'>
+
+                                <ColorButtons colorArr={noteColors} />
+
+                                {/* <div className='grid gap-1 grid-cols-6 h-fit w-fit [&>button]:rounded-full self-center m-3 [&>button]:shadow [&>button]:border [&>button]:border-black/30'>
+
                                     <button className='bg-red-500 text-red-500 w-9 h-6'>•</button>
                                     <button className='bg-orange-400 text-orange-400 w-9 h-6'>•</button>
                                     <button className='bg-yellow-300 text-yellow-300 w-9 h-6'>•</button>
@@ -96,7 +113,7 @@ export default function Calendar() {
                                     <button className='bg-gray-300 text-gray-300 w-9 h-6'>•</button>
                                     <button className='bg-zinc-600 text-zinc-600 w-9 h-6'>•</button>
                                     <button className='bg-neutral-800 text-neutral-800 w-9 h-6'>•</button>
-                                </div>
+                                </div> */}
                                 <div className='grid grid-cols-2 gap-2 m-2 w-fit self-end'>
                                     <button className='border border-1 border-black/20 rounded p-1 bg-red-400/75 text-red-800/90 hover:text-black/75 hover:border-black/50'>Cancel</button>
                                     <button className='border border-1 border-black/20 rounded p-1 bg-green-500/50 text-green-800/90 hover:text-black/75 hover:border-black/50'>Add</button>
@@ -106,6 +123,48 @@ export default function Calendar() {
                     </form>
                 </div>
             </div>
+        </>
+    )
+}
+
+function ColorButtons({colorArr}) {
+
+    const [selectedColor, setSelectedColor] = useState("neutral-800")
+    console.log('\n')
+    return (
+        <>
+            <div className='grid gap-1 grid-cols-6 h-fit w-fit self-center m-3'>
+                {colorArr.map(color => {
+                    if (color == selectedColor) {
+                        return <ColorButton color={color} setSelectedColor={setSelectedColor} selected={true} />
+                    } else {
+                        return <ColorButton color={color} setSelectedColor={setSelectedColor} selected={false} />
+                    }
+                })}
+            </div>
+        </>
+    )
+}
+
+function ColorButton({color, setSelectedColor, selected}) {
+
+    let textColor = color
+
+    if (selected) {
+        textColor = textColor.split('-')
+        textColor = textColor[0] + '-' + 500
+        console.log('\n v  selected  v', textColor)
+    }
+
+    let style = "bg-" + color + " text-" + textColor + " w-9 h-6 rounded-full shadow border border-black/30"
+    console.log(style)
+
+    return (
+        <>
+            <button className={style} onClick={e => {
+                e.preventDefault()
+                setSelectedColor(color)
+            }}>•</button>
         </>
     )
 }
