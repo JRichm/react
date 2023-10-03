@@ -26,7 +26,6 @@ export async function add_note(data: FormData, selectedDate) {
     console.log('added note titled: ', noteTitle)
 }
 
-
 // // READ
 
 // return a list of notes for a specific date

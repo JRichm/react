@@ -3,23 +3,23 @@ import React, { useState, useEffect } from 'react';
 
 import '@/styles/styles.css'
 import Day from "./day"
-import { getNotesForMonth } from './crud'
+import { getNotesForMonth, addCalendarNote } from './crud'
 import { text } from 'stream/consumers';
-
-{/* <button className='bg-red-500 text-red-500 w-9 h-6'>•</button>
-<button className='bg-orange-400 text-orange-400 w-9 h-6'>•</button>
-<button className='bg-yellow-300 text-yellow-300 w-9 h-6'>•</button>
-<button className='bg-green-500 text-green-500 w-9 h-6'>•</button>
-<button className='bg-blue-500 text-blue-500 w-9 h-6'>•</button>
-<button className='bg-purple-500 text-purple-500 w-9 h-6'>•</button>
-<button className='bg-slate-200 text-slate-200 w-9 h-6'>•</button>
-<button className='bg-gray-300 text-gray-300 w-9 h-6'>•</button>
-<button className='bg-zinc-600 text-zinc-600 w-9 h-6'>•</button>
-<button className='bg-neutral-800 text-neutral-800 w-9 h-6'>•</button> */}
 
 export default function Calendar() {
     const dayElements = []
-    const noteColors = ['red-500', 'orange-400', 'yellow-300', 'green-500', 'blue-500', 'purple-500', 'slate-200', 'gray-300', 'zinc-600', 'neutral-800']
+    const noteColors = [
+        'red-500',
+        'orange-400',
+        'yellow-300',
+        'green-500',
+        'blue-500',
+        'purple-500',
+        'slate-200',
+        'gray-300',
+        'zinc-600',
+        'neutral-800'
+    ]
 
     const [viewMonth, setViewMonth] = useState(new Date())
     const [notesForMonth, setNotesForMonth] = useState([])
@@ -120,7 +120,7 @@ function NewCalNoteForm({selectedDate, setSelectedDate, noteColors}) {
 
         // call crud to add note to database
         try {
-            console.log(formData)
+            addCalendarNote(formDataObject)
         } catch (error) {
             console.log(error)
         }
@@ -128,7 +128,6 @@ function NewCalNoteForm({selectedDate, setSelectedDate, noteColors}) {
         // reset  user input
         setFormData({ title: '', note: '', color: '', date: '' }) //color
     }
-
 
     return (
         <>
