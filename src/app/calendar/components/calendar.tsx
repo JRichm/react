@@ -86,61 +86,81 @@ export default function Calendar() {
                         </div>
                     </div>
                 </div>
-                <div className='border border-1 border-gray-200 rounded shadow'>
-                    <form className='flex flex-row'>
-                        <div className='flex flex-col w-2/3 shadow-sm border border-1 border-gray-200 p-1 m-2 rounded'>
-                            <input type='text' placeholder='note title' className='outline-none p-2'></input>
-                            <hr />
-                            <textarea placeholder='new note' className='outline-none p-2 h-36 resize-none'></textarea>
-                        </div>
-                        <div className='flex flex-col w-1/3 justify-between'>
-                            <div className='flex flex-row justify-center'>
-                                <input name='date-from' type='date' className='w-fit m-5' value={selectedDate.toISOString().split('T')[0]} onChange={e => setSelectedDate(new Date(e.target.value))}></input>
-                            </div>
-                            <div className='flex flex-col'>
-
-                                <ColorButtons colorArr={noteColors} />
-
-                                {/* <div className='grid gap-1 grid-cols-6 h-fit w-fit [&>button]:rounded-full self-center m-3 [&>button]:shadow [&>button]:border [&>button]:border-black/30'>
-
-                                    <button className='bg-red-500 text-red-500 w-9 h-6'>•</button>
-                                    <button className='bg-orange-400 text-orange-400 w-9 h-6'>•</button>
-                                    <button className='bg-yellow-300 text-yellow-300 w-9 h-6'>•</button>
-                                    <button className='bg-green-500 text-green-500 w-9 h-6'>•</button>
-                                    <button className='bg-blue-500 text-blue-500 w-9 h-6'>•</button>
-                                    <button className='bg-purple-500 text-purple-500 w-9 h-6'>•</button>
-                                    <button className='bg-slate-200 text-slate-200 w-9 h-6'>•</button>
-                                    <button className='bg-gray-300 text-gray-300 w-9 h-6'>•</button>
-                                    <button className='bg-zinc-600 text-zinc-600 w-9 h-6'>•</button>
-                                    <button className='bg-neutral-800 text-neutral-800 w-9 h-6'>•</button>
-                                </div> */}
-                                <div className='grid grid-cols-2 gap-2 m-2 w-fit self-end'>
-                                    <button className='border border-1 border-black/20 rounded p-1 bg-red-400/75 text-red-800/90 hover:text-black/75 hover:border-black/50'>Cancel</button>
-                                    <button className='border border-1 border-black/20 rounded p-1 bg-green-500/50 text-green-800/90 hover:text-black/75 hover:border-black/50'>Add</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                <NewCalNoteForm selectedDate={selectedDate} setSelectedDate={setSelectedDate} noteColors={noteColors}/>
             </div>
         </>
     )
 }
 
-function ColorButtons({colorArr}) {
-
+function NewCalNoteForm({selectedDate, setSelectedDate, noteColors}) {
     const [selectedColor, setSelectedColor] = useState("neutral-800")
-    console.log('\n')
+    const [formData, setFormData] = useState({ title: '', note: '', color: '', date: '' })
+
+    formData.color = selectedColor
+    formData.date = selectedDate
+
+    function handleInputChange(e) {
+
+        // update user input
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        })
+    }
+
+    function submitNewNote(e) {
+        e.preventDefault()
+
+        // create formData object
+        const {title, note} = formData;
+        const formDataObject = new FormData()
+        formDataObject.append('title', title)
+        formDataObject.append('note', note)
+
+        // call crud to add note to database
+        try {
+            console.log(formData)
+        } catch (error) {
+            console.log(error)
+        }
+
+        // reset  user input
+        setFormData({ title: '', note: '', color: '', date: '' }) //color
+    }
+
+
     return (
         <>
-            <div className='grid gap-1 grid-cols-6 h-fit w-fit self-center m-3'>
-                {colorArr.map(color => {
-                    if (color == selectedColor) {
-                        return <ColorButton color={color} setSelectedColor={setSelectedColor} selected={true} />
-                    } else {
-                        return <ColorButton color={color} setSelectedColor={setSelectedColor} selected={false} />
-                    }
-                })}
+            <div className='border border-1 border-gray-200 rounded shadow'>
+                <form className='flex flex-row' onSubmit={submitNewNote}>
+                    <div className='flex flex-col w-2/3 shadow-sm border border-1 border-gray-200 p-1 m-2 rounded'>
+                        <input type='text' placeholder='note title' className='outline-none p-2' onChange={handleInputChange} name="title"></input>
+                        <hr />
+                        <textarea placeholder='new note' className='outline-none p-2 h-36 resize-none' onChange={handleInputChange} name="note"></textarea>
+                    </div>
+                    <div className='flex flex-col w-1/3 justify-between'>
+                        <div className='flex flex-row justify-center'>
+                            <input name='date' type='date' className='w-fit m-5' value={selectedDate.toISOString().split('T')[0]} onChange={handleInputChange}></input>
+                        </div>
+                        <div className='flex flex-col'>
+
+                        <div className='grid gap-1 grid-cols-6 h-fit w-fit self-center m-3'>
+                            {noteColors.map(color => {
+                                if (color == selectedColor) {
+                                    return <ColorButton color={color} setSelectedColor={setSelectedColor} selected={true} />
+                                } else {
+                                    return <ColorButton color={color} setSelectedColor={setSelectedColor} selected={false} />
+                                }
+                            })}
+                        </div>
+                            <div className='grid grid-cols-2 gap-2 m-2 w-fit self-end'>
+                                <button className='border border-1 border-black/20 rounded p-1 bg-red-400/75 text-red-800/90 hover:text-black/75 hover:border-black/50'>Cancel</button>
+                                <button className='border border-1 border-black/20 rounded p-1 bg-green-500/50 text-green-800/90 hover:text-black/75 hover:border-black/50'>Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </>
     )
@@ -153,11 +173,9 @@ function ColorButton({color, setSelectedColor, selected}) {
     if (selected) {
         textColor = textColor.split('-')
         textColor = textColor[0] + '-' + 500
-        console.log('\n v  selected  v', textColor)
     }
 
     let style = "bg-" + color + " text-" + textColor + " w-9 h-6 rounded-full shadow border border-black/30"
-    console.log(style)
 
     return (
         <>

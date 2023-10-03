@@ -3,7 +3,6 @@
 export default function Day({date, notes, selectedDate, setSelectedDate}) {
     let selectedStyle
     let currentDateStyle
-    console.log(date.getDate(), notes)
 
     function noteDotElements() {
         let noteDots = []
@@ -15,8 +14,6 @@ export default function Day({date, notes, selectedDate, setSelectedDate}) {
 
         return noteDots
     }
-
-    console.log(selectedDate)
 
     if (date.getMonth() == selectedDate.getMonth() && date.getDate() == selectedDate.getDate()) {
         selectedStyle += 'border border-gray-200 border-1 shadow-sm shadow-black/50'
