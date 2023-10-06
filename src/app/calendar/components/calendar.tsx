@@ -92,6 +92,7 @@ export default function Calendar() {
     )
 }
 
+
 function NewCalNoteForm({selectedDate, setSelectedDate, noteColors}) {
     const [selectedColor, setSelectedColor] = useState("neutral-800")
     const [formData, setFormData] = useState({ title: '', note: '', color: '', date: '' })
