@@ -39,8 +39,3 @@ export async function get_notes_for_date(date) {
     return notes
 }
 
-
-// // EDIT
-
-
-// // DELETE
