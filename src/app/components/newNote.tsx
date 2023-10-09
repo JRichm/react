@@ -3,7 +3,8 @@ import { add_note } from 'crud';
 
 export default function NewNote({ selectedDate }) {
 
-
+    const [formData, setFormData] = useState({ title: '', note: '' })
+    
     // handle user input
     function handleInputChange(e) {
 
