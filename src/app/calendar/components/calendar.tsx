@@ -168,21 +168,17 @@ function NewCalNoteForm({selectedDate, setSelectedDate, noteColors}) {
 
 function ColorButton({color, setSelectedColor, selected}) {
 
-    let textColor = color
+    color = color.split("-")[0]
 
-    if (selected) {
-        textColor = textColor.split('-')
-        textColor = textColor[0] + '-' + 500
-    }
-
-    let style = "bg-" + color + " text-" + textColor + " w-9 h-6 rounded-full shadow border border-black/30"
+    let style = "w-9 h-6 rounded-full shadow border border-black/30 bg-" + color + "-700"
+    console.log(style)
 
     return (
         <>
             <button className={style} onClick={e => {
                 e.preventDefault()
                 setSelectedColor(color)
-            }}>•</button>
+            }}></button>
         </>
     )
 }
