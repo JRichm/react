@@ -94,11 +94,14 @@ export default function Calendar() {
 
 
 function NewCalNoteForm({selectedDate, setSelectedDate, noteColors}) {
-    const [selectedColor, setSelectedColor] = useState("neutral-800")
+    const [selectedColor, setSelectedColor] = useState("neutral-800") // buttons dont set the number, buttons set value to 'yello' 'green' 
     const [formData, setFormData] = useState({ title: '', note: '', color: '', date: '' })
 
     formData.color = selectedColor
-    formData.date = selectedDate
+    formData.date = selectedDate.toISOString()
+
+    console.log(formData.color)
+    console.log(formData.date)
 
     function handleInputChange(e) {
 
@@ -114,13 +117,19 @@ function NewCalNoteForm({selectedDate, setSelectedDate, noteColors}) {
         e.preventDefault()
 
         // create formData object
-        const {title, note} = formData;
+        const {title, note, date, color} = formData;
+        console.log('values from formData')
+        console.log('title ', title, 'note ', note)
+
         const formDataObject = new FormData()
-        formDataObject.append('title', title)
-        formDataObject.append('note', note)
+        formDataObject.set('title', title)
+        formDataObject.set('note', note)
+        formDataObject.set('date', date)
+        formDataObject.set('color', color)
 
         // call crud to add note to database
         try {
+            console.log('calling crud')
             addCalendarNote(formDataObject)
         } catch (error) {
             console.log(error)
@@ -171,7 +180,6 @@ function ColorButton({color, setSelectedColor, selected}) {
     color = color.split("-")[0]
 
     let style = "w-9 h-6 rounded-full shadow border border-black/30 bg-" + color + "-700"
-    console.log(style)
 
     return (
         <>

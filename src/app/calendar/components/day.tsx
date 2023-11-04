@@ -32,7 +32,7 @@ export default function Day({date, notes, selectedDate, setSelectedDate}) {
                         <p className={`w-6 h-6 text-center  ${currentDateStyle}`}>{date.getDate()}</p>
                     </span>
                     <div className='flex flex-row'>
-                        {noteDotElements()}
+                        { noteDotElements() }
                     </div>
                 </div>
             </div>

@@ -21,16 +21,19 @@ export async function getNotesForMonth(fromDate, toDate) {
 }
 
 export async function addCalendarNote(data: FormData) {
+
+    console.log(data)
+
     const noteTitle = data.get("title")?.valueOf()
-    const note = data.get("note")?.valueOf()
+    const note      = data.get("note")?.valueOf()
     const noteColor = data.get("color")?.valueOf()
-    const noteDate = data.get("date")?.valueOf()
+    const noteDate  = data.get("date")?.valueOf()
     
-    console.log('\tnew note to add\n')
-    console.log(noteTitle)
-    console.log(note)
-    console.log(noteColor)
-    console.log(noteDate)
+    console.log('\tCRUD INPUT DATA')
+    console.log('noteTitle:\t', noteTitle)
+    console.log('note\t\t', note)
+    console.log('noteColor\t', noteColor)
+    console.log('noteDate\t', noteDate)
 
     if (typeof noteTitle !== "string" || noteTitle.length === 0) {
         throw new Error("Invalid Note Title");
@@ -39,8 +42,8 @@ export async function addCalendarNote(data: FormData) {
     }
 
     await prisma.calendarNote.create({data:
-        {title: noteTitle, note: note, dateAttatched: selectedDate}
+        {title: noteTitle, note: note, dateAttatched: noteDate.toLocaleString()}
     })
-    console.log('added note titled: ', noteTitle)
 
+    console.log('added note titled: ', noteTitle)
 }
