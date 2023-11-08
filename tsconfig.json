@@ -6,7 +6,8 @@
       "@/db": ["db"],
       "@/components/*": ["components/*"],
       "@/styles/*": ["styles/*"],
-      "@/journal/*": ["journal/*"]
+      "@/journal/*": ["journal/*"],
+      "@grocery/*": ["grocery/*"]
     },
     "lib": [
       "dom",
